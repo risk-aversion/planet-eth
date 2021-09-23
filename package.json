@@ -20,8 +20,7 @@
     "web3": "^1.5.3"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "yarn build && rm -rf docs && mv build docs && git add --all && git commit --message 'Publish' && git push",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
