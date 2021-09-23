@@ -2,6 +2,7 @@
 import React from "react";
 
 import DeckGL from "@deck.gl/react";
+import { MapView } from "@deck.gl/core";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import countriesGeoJson from "./countries.json";
 
@@ -42,7 +43,7 @@ export default function MapComponent() {
       controller={true}
       layers={layers}
       getTooltip={({ object }) => object && object.properties.ADMIN}
-      // views={new MapView({ repeat: true })}
+      views={new MapView({ repeat: true })}
     />
   );
 }
