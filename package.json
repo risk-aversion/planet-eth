@@ -21,7 +21,7 @@
     "web3": "^1.5.3"
   },
   "scripts": {
-    "deploy": "yarn build && rm -rf docs && mv build docs && git add --all && git commit --message 'Publish' && git push",
+    "deploy": "yarn build && rm -rf docs && mv build docs && echo 'planeteth.app' >> ./docs/CNAME && git add --all && git commit --message 'Publish' && git push",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
