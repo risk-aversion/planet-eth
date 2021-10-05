@@ -22,7 +22,7 @@ export default function MapComponent() {
     zoom: 0,
   };
 
-  const geoJsonLayer = new GeoJsonLayer({
+  const geoJsonLayer = React.useMemo(() => new GeoJsonLayer({
     id: "geojson-layer",
     data,
     pickable: true,
@@ -33,7 +33,8 @@ export default function MapComponent() {
     // getLineColor: [0, 0, 0, 255],//d => colorToRGBArray(d.properties.color),
     // getLineColor: [0, 0, 0, 255],
     // getLineWidth: 0.1,
-  });
+  }),
+  [data])
 
   const layers = [geoJsonLayer];
 
