@@ -9,7 +9,7 @@ const App = () => {
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
-        <MapComponent />
+        <MapComponent/>
       </BaseProvider>
     </StyletronProvider>
   );

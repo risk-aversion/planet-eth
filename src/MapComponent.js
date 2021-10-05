@@ -14,7 +14,19 @@ function hexToRGB(hex) {
   return [r, g, b, 255];
 }
 
+const getCountries = async function() {
+  const meta = await fetch('https://api-staging.rarible.com/protocol/v0.1/ethereum/nft/items/byCollection?collection=0x8e3ab56dff9ad1954c8cb7e8890ba049ca4adf13&includeMeta=true')
+  return meta.json()
+}
+
 export default function MapComponent() {
+  const [mapMetaData, setMapMetaData] = React.useState() 
+  React.useEffect(() => {
+    if (!mapMetaData) {
+      getCountries().then(setMapMetaData)
+    }
+  }, [mapMetaData])
+  
   const data = countriesGeoJson;
   const viewState = {
     longitude: 0,
@@ -22,7 +34,7 @@ export default function MapComponent() {
     zoom: 0,
   };
 
-  const geoJsonLayer = React.useMemo(() => new GeoJsonLayer({
+  const geoJsonLayer = new GeoJsonLayer({
     id: "geojson-layer",
     data,
     pickable: true,
@@ -33,9 +45,7 @@ export default function MapComponent() {
     // getLineColor: [0, 0, 0, 255],//d => colorToRGBArray(d.properties.color),
     // getLineColor: [0, 0, 0, 255],
     // getLineWidth: 0.1,
-  }),
-  [data])
-
+  })
   const layers = [geoJsonLayer];
 
   return (
@@ -43,7 +53,12 @@ export default function MapComponent() {
       initialViewState={viewState}
       controller={true}
       layers={layers}
-      getTooltip={({ object }) => object && object.properties.ADMIN}
+      getTooltip={({ object }) => {
+        // const meta = mapMetaData?.items?.find(country => {
+        //   return country?.meta?.name?.includes(object?.properties?.ADMIN)
+        // })
+        return object && object.properties.ADMIN
+      }}
       views={new MapView({ repeat: true })}
     />
   );
