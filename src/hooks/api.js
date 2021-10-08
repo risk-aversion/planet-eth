@@ -10,7 +10,6 @@ export const RaribleHook = () => {
   useEffect(() => {
     (async () => {
       const meta = await (await fetch(URL)).json();
-      console.log(meta);
       if (meta) {
         setMetadata(meta);
         const list = meta.items.reduce((acc, val) => {
