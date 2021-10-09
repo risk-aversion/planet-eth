@@ -1,28 +1,17 @@
 /// app.js
 import React from "react";
-import { styled } from "baseui";
+import { styled } from 'baseui';
 import DeckGL from "@deck.gl/react";
 import { MapView } from "@deck.gl/core";
 import { GeoJsonLayer } from "@deck.gl/layers";
 
-import countriesGeoJson from "./countries.json";
-import { BLUE, BLACK } from "./utils/constants";
+import countriesGeoJson from "../countries.json";
+import { BLUE, BLACK } from "../utils/constants";
 
-import { RaribleHook } from "./hooks/api";
-
-const Leaderboard = styled("div", ({ $theme }) => {
-  return {
-    fontFamily: "Chakra Petch",
-    color: "white",
-    width: "40vw",
-    height: "100vh",
-    float: "right",
-  };
-});
-
-const Row = styled("div", ({ $theme }) => ({
-  display: "flex",
-  justifyContent: "space-between",
+const MapContainer = styled("div", ({ $theme }) => ({
+  height: "80vh",
+  width: "60vw",
+  position: "relative",
 }));
 
 const viewState = {
@@ -31,11 +20,9 @@ const viewState = {
   zoom: 0,
 };
 
+const data = countriesGeoJson;
+
 export default function MapComponent() {
-  const { ownerList, metadata } = RaribleHook();
-
-  const data = countriesGeoJson;
-
   const geoJsonLayer = new GeoJsonLayer({
     id: "geojson-layer",
     data,
@@ -52,11 +39,11 @@ export default function MapComponent() {
   });
 
   return (
-    <div>
+    <MapContainer>
       <DeckGL
         initialViewState={viewState}
-        width={window.screen.width * 0.6}
-        height={window.screen.height}
+        width={"100%"}
+        height={"100%"}
         controller={true}
         layers={[geoJsonLayer]}
         getTooltip={({ object }) => {
@@ -67,16 +54,6 @@ export default function MapComponent() {
         }}
         views={new MapView({ repeat: true })}
       />
-      <Leaderboard>
-        Leaderboard
-        {ownerList &&
-          Object.entries(ownerList).map(([key, val]) => (
-            <Row key={key}>
-              <div>{key}:</div>
-              <div>{val.length}</div>
-            </Row>
-          ))}
-      </Leaderboard>
-    </div>
+    </MapContainer>
   );
 }
