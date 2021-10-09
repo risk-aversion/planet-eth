@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,KACE,qBAAuB,CACvB,QAAS,CACT,qCAAuC,CACvC,kCAAmC,CACnC,iCACF","file":"main.3f2998a7.chunk.css","sourcesContent":["body {\n  background-color: black;\n  margin: 0;\n  font-family: \"Chakra Petch\", sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}"]}
